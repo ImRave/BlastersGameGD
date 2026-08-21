@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b7dpa0hy3puye"]
+
+[ext_resource type="Script" uid="uid://dppt3qi5fopjt" path="res://scripts/control.gd" id="1_0fbet"]
+[ext_resource type="PackedScene" uid="uid://bgi58tuh8xcan" path="res://Escenas/obstacle.tscn" id="2_62e2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fbet"]
+size = Vector2(550, 118)
+
+[node name="control" type="StaticBody2D"]
+scale = Vector2(1.5, 1.5)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_0fbet")
+scene_to_spawn = ExtResource("2_62e2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.666667, 0)
+shape = SubResource("RectangleShape2D_0fbet")

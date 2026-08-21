@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bdj3ogf2mmtrp"]
+
+[ext_resource type="Script" uid="uid://focmbed3ih3h" path="res://scripts/enemyship.gd" id="1_lv4ox"]
+[ext_resource type="Texture2D" uid="uid://j5q4i8ywcwiw" path="res://accets/EnemyShip.png" id="2_lv4ox"]
+[ext_resource type="PackedScene" uid="uid://ftio3ga3dsgn" path="res://Escenas/point.tscn" id="2_tjafy"]
+
+[node name="enemy" type="CharacterBody2D" unique_id=1207303486]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_lv4ox")
+point_scene = ExtResource("2_tjafy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1745713972]
+position = Vector2(-8, -7)
+polygon = PackedVector2Array(8, 1, 13, 14, 3, 14)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1508630641]
+modulate = Color(1, 1, 0, 1)
+texture = ExtResource("2_lv4ox")
+
+[node name="enemy" type="Area2D" parent="." unique_id=37554228]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="enemy" unique_id=1300424234]
+position = Vector2(-8, -7)
+polygon = PackedVector2Array(8, 1, 13, 14, 3, 14)
+
+[connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="enemy" to="." method="_on_area_2d_area_exited"]

@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://bi8n6fx6vi8gp"]
+
+[ext_resource type="Texture2D" uid="uid://drvnc4tlkwv2l" path="res://accets/bulet.png" id="1_u702k"]
+[ext_resource type="Script" uid="uid://gohg8eko5mdc" path="res://scripts/bulet.gd" id="2_fq7le"]
+
+[sub_resource type="Animation" id="Animation_fq7le"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_u702k"]
+resource_name = "appear"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.120742, 0.0947323),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8baqt"]
+_data = {
+&"RESET": SubResource("Animation_fq7le"),
+&"appear": SubResource("Animation_u702k")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhih0"]
+size = Vector2(2.01894, 4.03788)
+
+[node name="Bulet" type="Sprite2D"]
+z_index = 1
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_u702k")
+region_rect = Rect2(0, 0, 8.02288, 8.16476)
+script = ExtResource("2_fq7le")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8baqt")
+}
+
+[node name="bulet" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bulet"]
+position = Vector2(-4.81353e-07, 0)
+shape = SubResource("RectangleShape2D_rhih0")
+
+[connection signal="area_entered" from="bulet" to="." method="_on_area_2d_area_entered"]

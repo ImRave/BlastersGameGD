@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bnehno84aww5t"]
+
+[ext_resource type="Script" uid="uid://bok14aut1ghb7" path="res://scripts/ship.gd" id="1_4cq66"]
+[ext_resource type="Texture2D" uid="uid://b3g31b0jsifop" path="res://accets/shipbeta2.png" id="2_4cq66"]
+
+[sub_resource type="Animation" id="Animation_v4325"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4cq66"]
+resource_name = "shoot"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(0.378929, 1, 6.27667),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.875), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c3vuw"]
+_data = {
+&"RESET": SubResource("Animation_v4325"),
+&"shoot": SubResource("Animation_4cq66")
+}
+
+[node name="ship" type="CharacterBody2D" unique_id=339937601]
+scale = Vector2(1.5, 1.5)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_4cq66")
+tiempo_stun = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1672663243]
+position = Vector2(-8, -7)
+polygon = PackedVector2Array(8, 0.5, 13, 14, 3, 14)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2079114090]
+position = Vector2(0, -3.57628e-07)
+texture = ExtResource("2_4cq66")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=1415938661]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_c3vuw")
+
+[node name="player" type="Area2D" parent="." unique_id=279050540]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player" unique_id=267124289]
+position = Vector2(-8, -7)
+polygon = PackedVector2Array(8, 0, 13.5, 14.5, 2.5, 14.5)
+
+[connection signal="area_entered" from="player" to="." method="_on_player_area_entered"]
+[connection signal="area_exited" from="player" to="." method="_on_player_area_exited"]

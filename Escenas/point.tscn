@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://ftio3ga3dsgn"]
+
+[ext_resource type="Texture2D" uid="uid://nugqy23l32xf" path="res://accets/point.png" id="1_7fkqo"]
+[ext_resource type="Script" uid="uid://bjitvm0lkw4hy" path="res://scripts/point.gd" id="2_q733i"]
+[ext_resource type="PackedScene" uid="uid://4coa7vkjcwmh" path="res://Escenas/RemoteBulet.tscn" id="3_c0ia7"]
+
+[sub_resource type="Animation" id="Animation_c0ia7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Siprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Siprite:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Siprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-4.5474746e-13]
+}
+
+[sub_resource type="Animation" id="Animation_q733i"]
+resource_name = "idel"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Siprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.029458608, 0.23333332, 0.43333334, 0.6333333, 0.8333333, 1.0294585, 1.2333332, 1.4333333, 1.6333333, 1.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Siprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-4.5474746e-13, 6.2831855]
+}
+
+[sub_resource type="Animation" id="Animation_35mby"]
+resource_name = "shake"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Siprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.002325669, 0.10232567, 0.20232567, 0.3, 0.4, 0.50232565, 0.6, 0.7, 0.7976744, 0.8976743, 0.99999994),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(-1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(0, 0), Vector2(1, 1), Vector2(-1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_35mby"]
+_data = {
+&"RESET": SubResource("Animation_c0ia7"),
+&"idel": SubResource("Animation_q733i"),
+&"shake": SubResource("Animation_35mby")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4wahx"]
+radius = 3.0
+
+[node name="Point" type="Node2D" unique_id=1524401382]
+rotation = 1.2281584
+script = ExtResource("2_q733i")
+escena_al_impactar = ExtResource("3_c0ia7")
+
+[node name="Siprite" type="Sprite2D" parent="." unique_id=599596262]
+texture = ExtResource("1_7fkqo")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Siprite" unique_id=1595080437]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_35mby")
+
+[node name="point" type="Area2D" parent="Siprite" unique_id=886174408]
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Siprite/point" unique_id=1138662824]
+shape = SubResource("CircleShape2D_4wahx")
+
+[connection signal="area_entered" from="Siprite/point" to="." method="_on_point_area_entered"]

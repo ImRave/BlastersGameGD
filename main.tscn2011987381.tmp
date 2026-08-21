@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://c24uymlu3oc6b"]
+
+[ext_resource type="PackedScene" uid="uid://bs606664wma7g" path="res://ship.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bgi58tuh8xcan" path="res://obstacle.tscn" id="1_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bw2iyjlidakvr" path="res://accets/fondo.png" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b7dpa0hy3puye" path="res://control.tscn" id="5_lquwl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(920.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(25, 500)
+
+[node name="Main" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.315, 0.315)
+
+[node name="Obstacle" parent="." instance=ExtResource("1_1bvp3")]
+position = Vector2(-667, -364)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(2, 2)
+scale = Vector2(5, 5)
+texture = ExtResource("1_h2yge")
+
+[node name="ship" parent="." instance=ExtResource("1_0xm2m")]
+position = Vector2(-145, -50)
+
+[node name="limites" type="Node2D" parent="."]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="limites"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -250)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="limites/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="limites"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-450, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="limites"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(450, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D4"]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="limites"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="zona de spanw de opstaculos" type="Node" parent="."]
+
+[node name="control4" parent="zona de spanw de opstaculos" instance=ExtResource("5_lquwl")]
+position = Vector2(618, 28)
+rotation = 1.5708
+min_spawn_time = 1.0
+max_spawn_time = 2.0
+
+[node name="control" parent="zona de spanw de opstaculos" instance=ExtResource("5_lquwl")]
+position = Vector2(14, 389)
+min_spawn_time = 1.0
+max_spawn_time = 2.0
+
+[node name="control2" parent="zona de spanw de opstaculos" instance=ExtResource("5_lquwl")]
+position = Vector2(-7, -392)
+min_spawn_time = 1.0
+max_spawn_time = 2.0
+
+[node name="control3" parent="zona de spanw de opstaculos" instance=ExtResource("5_lquwl")]
+position = Vector2(-595, 19)
+rotation = 1.5708
+min_spawn_time = 1.0
+max_spawn_time = 2.0

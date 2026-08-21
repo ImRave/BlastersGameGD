@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://c24uymlu3oc6b"]
+
+[ext_resource type="PackedScene" uid="uid://bs606664wma7g" path="res://ship.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bdj3ogf2mmtrp" path="res://enemyship.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_0xm2m")]
+position = Vector2(150, -57)
+
+[node name="Enemyship2" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-359, -82)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship3" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-234, -24)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship5" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(16, 92)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship9" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(257, -103)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship6" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(141, 150)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship7" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-264, 75)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship4" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-109, 34)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship8" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-250, -116)
+target_path = NodePath("../CharacterBody2D")
+
+[node name="Enemyship" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(-125, -58)
+target_path = NodePath("../CharacterBody2D")

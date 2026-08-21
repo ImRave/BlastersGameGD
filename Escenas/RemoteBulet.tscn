@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://4coa7vkjcwmh"]
+
+[ext_resource type="Script" uid="uid://y2nhaj7v4nex" path="res://scripts/remote_bulet.gd" id="1_fkl6f"]
+[ext_resource type="Texture2D" uid="uid://drvnc4tlkwv2l" path="res://accets/bulet.png" id="2_eskns"]
+
+[node name="RemoteBulet" type="Node2D" unique_id=1336782315]
+script = ExtResource("1_fkl6f")
+velocidad = 100.0
+radio_impacto = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=519615391]
+modulate = Color(0, 1, 0.09411765, 1)
+rotation = 1.5707964
+texture = ExtResource("2_eskns")
