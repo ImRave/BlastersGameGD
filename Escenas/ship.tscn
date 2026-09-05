@@ -45,7 +45,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_4cq66")
-fire_rate = 0.0
 tiempo_stun = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1672663243]

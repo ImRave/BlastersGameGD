@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 const BULLET_SCENE := preload("res://Escenas/bulet.tscn")
 
-@export var fire_rate := 0.25
+@export var fire_rate := 0.0
 @export var bullet_speed := 400.0
 @export var muzzle_offset := 15.0
 
@@ -24,7 +24,7 @@ var stunned := false
 var forward_direction := Vector2.UP
 var drift_velocity := Vector2.ZERO
 var can_shoot := true
-var shoot_timer := 0.0
+var shoot_timer := 1
 
 # Sistema mejorado de daño por contacto
 var is_touching_enemy := false
@@ -96,8 +96,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("shoot"):
 		if can_shoot:
 			shoot_bullet()
-			#can_shoot = false
-			shoot_timer = 0.0
+			can_shoot = false
+			shoot_timer = 0.75
 	else:
 		shoot_timer += delta
 		if shoot_timer >= fire_rate:
@@ -106,6 +106,7 @@ func _physics_process(delta: float) -> void:
 	# --- Auto destrucción ---
 	if scale.x <= 0.4:
 		print("Auto-destrucción: escala mínima alcanzada")
+		
 		queue_free()
 
 	# --- Sistema de daño por contacto con enemigos ---
@@ -257,18 +258,6 @@ func shoot_bullet() -> void:
 		bullet.set_direction(Vector2.UP.rotated(rotation))
 
 
-# --- 🔹 Función de reset (opcional, para debugging) ---
-func reset_to_initial_values():
-	acceleration = initial_acceleration
-	max_speed = initial_max_speed
-	scale = initial_scale
-	is_touching_enemy = false
-	enemy_contact_timer = 0.0
-	first_contact_processed = false
-	stunned = false
-	stun_restante = 0.0
-	print("Valores reseteados a iniciales")
-
 # --- 🔹 Debugging con teclas (opcional) ---
 func _input(event):
 	# Tecla Espacio para ver estado actual
@@ -284,5 +273,4 @@ func _input(event):
 		print("Tiempo restante aturdimiento: ", stun_restante)
 	
 	# Tecla Escape para resetear valores
-	if event.is_action_pressed("ui_cancel"):
-		reset_to_initial_values()
+	

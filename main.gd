@@ -22,15 +22,17 @@ extends Node2D
 @export var max_intentos: int = 100
 
 var enemigos_activos: int = 0
-
-
+var kills:int =0
+var total_time_in_secs : int = 0
+var player : bool = true
 func _ready() -> void:
 
 	# Comenzar generadores
+	$CanvasLayer/HBoxContainer/Timer.start()
 	generar_meteoritos()
 	generar_enemigos()
 
-
+	
 # =========================================================
 # METEORITOS
 # =========================================================
@@ -96,7 +98,7 @@ func crear_enemigo() -> void:
 	enemigo.global_position = posicion
 
 	add_child(enemigo)
-
+	
 	enemigos_activos += 1
 
 	# Cuando el enemigo sea eliminado,
@@ -107,7 +109,11 @@ func crear_enemigo() -> void:
 func _enemigo_eliminado() -> void:
 
 	enemigos_activos -= 1
-
+	if player == true:
+		kills +=1
+		$CanvasLayer/HBoxContainer/Kills/NK.text = str(kills).pad_zeros(3)
+	print(kills)
+	
 	if enemigos_activos < 0:
 		enemigos_activos = 0
 
@@ -192,3 +198,49 @@ func posicion_en_zona_prohibida(posicion: Vector2) -> bool:
 			if resultado["collider"] == zona_prohibida:
 				return true
 		return false
+
+
+func _on_timer_timeout() -> void:
+	total_time_in_secs += 1
+	var m = int(total_time_in_secs / 60.0)
+	var s = total_time_in_secs - m * 60
+	$CanvasLayer/HBoxContainer/time.text = '%02d:%02d' % [m, s]
+	
+
+func leer_numero_de_txt(ruta: String) -> int:
+	var archivo = FileAccess.open(ruta, FileAccess.READ)
+	if archivo == null:
+		print("Error: No se pudo abrir el archivo")
+		return 0
+	
+	var contenido = archivo.get_as_text()
+	archivo.close()
+	
+	# Limpiar espacios y convertir a entero
+	var numero = int(contenido.strip_edges())
+	return numero
+
+
+func escribir_numero_en_txt(ruta: String, numero: int) -> void:
+	var archivo = FileAccess.open(ruta, FileAccess.WRITE)
+	if archivo == null:
+		print("Error: No se pudo abrir el archivo para escribir")
+		return
+	
+	archivo.store_string(str(numero))
+	archivo.close()
+	print("Número guardado: ", numero)
+
+func save()->void:
+	if leer_numero_de_txt("res://saves/Kills.txt") < kills:
+		escribir_numero_en_txt("res://saves/Kills.txt",kills)
+	
+
+
+func _on_child_exiting_tree(child: CharacterBody2D) -> void:
+	print(child.name)
+	if child.name == "ship":
+		player = false
+		save()
+		get_tree().change_scene_to_file("res://MainMenu.tscn")
+		queue_free()
