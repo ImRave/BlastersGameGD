@@ -208,32 +208,22 @@ func _on_timer_timeout() -> void:
 	
 
 func leer_numero_de_txt(ruta: String) -> int:
-	var archivo = FileAccess.open(ruta, FileAccess.READ)
-	if archivo == null:
-		print("Error: No se pudo abrir el archivo")
-		return 0
+	var points =0
+	if ResourceLoader.exists(ruta):
+		var data =load(ruta)
+		points =data.max_point
 	
-	var contenido = archivo.get_as_text()
-	archivo.close()
-	
-	# Limpiar espacios y convertir a entero
-	var numero = int(contenido.strip_edges())
-	return numero
+	return points
 
 
 func escribir_numero_en_txt(ruta: String, numero: int) -> void:
-	var archivo = FileAccess.open(ruta, FileAccess.WRITE)
-	if archivo == null:
-		print("Error: No se pudo abrir el archivo para escribir")
-		return
-	
-	archivo.store_string(str(numero))
-	archivo.close()
-	print("Número guardado: ", numero)
+	var data  =Save.new()
+	data.max_point =numero
+	ResourceSaver.save(data,ruta)
 
 func save()->void:
-	if leer_numero_de_txt("res://saves/Kills.txt") < kills:
-		escribir_numero_en_txt("res://saves/Kills.txt",kills)
+	if leer_numero_de_txt("user://save.tres") < kills:
+		escribir_numero_en_txt("user://save.tres",kills)
 	
 
 

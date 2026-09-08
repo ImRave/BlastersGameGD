@@ -1,20 +1,15 @@
 extends Control
 
 func leer_numero_de_txt(ruta: String) -> int:
-	var archivo = FileAccess.open(ruta, FileAccess.READ)
-	if archivo == null:
-		print("Error: No se pudo abrir el archivo")
-		return 0
+	var points =0
+	if ResourceLoader.exists(ruta):
+		var data =load(ruta)
+		points =data.max_point
 	
-	var contenido = archivo.get_as_text()
-	archivo.close()
-	
-	# Limpiar espacios y convertir a entero
-	var numero = int(contenido.strip_edges())
-	return numero
+	return points
 	
 func _ready() -> void:
-	$HBoxContainer/Kills/NK.text = str(leer_numero_de_txt("res://saves/Kills.txt")).pad_zeros(3)
+	$HBoxContainer/Kills/NK.text = str(leer_numero_de_txt("user://save.tres")).pad_zeros(3)
 	pass
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://main.tscn")
