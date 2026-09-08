@@ -17,6 +17,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h7a2f")
 
+[node name="Game over" type="CanvasLayer" parent="." unique_id=1952891383]
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2056902678]
 layout_mode = 0
 offset_left = -43.0
