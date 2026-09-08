@@ -1,144 +1,146 @@
 [gd_scene format=3 uid="uid://c24uymlu3oc6b"]
 
-[ext_resource type="Script" uid="uid://frt4tl3rw1ky" path="res://main_menu.gd" id="1_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://ckvtb6qw5clta" path="res://accets/background-0000.jpg" id="2_lquwl"]
-[ext_resource type="Texture2D" uid="uid://l1n814nyxdki" path="res://accets/1810fc8787fa7cd3bf4ca4fcb3635297.jpg" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bgi58tuh8xcan" path="res://Escenas/obstacle.tscn" id="1_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bw2iyjlidakvr" path="res://accets/fondo.png" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://numjl46o5x0i" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dp8k2fdt03vvp" path="res://Escenas/Pause.tscn" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://bdj3ogf2mmtrp" path="res://Escenas/enemyship.tscn" id="5_lquwl"]
 [ext_resource type="FontFile" uid="uid://doaxshlddkws7" path="res://accets/font/PixelOperator.ttf" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bnehno84aww5t" path="res://Escenas/ship.tscn" id="6_272bh"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmibt"]
-bg_color = Color(1, 0.33333334, 0, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4g6i"]
+size = Vector2(1022, 573)
 
-[node name="MainMenu" type="Control" unique_id=1033037026]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_1bvp3")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(920.5, 20)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2056902678]
-layout_mode = 0
-offset_left = -43.0
-offset_top = -30.0
-offset_right = 853.0
-offset_bottom = 522.0
-color = Color(0, 0, 0, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(25, 500)
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=731098159]
-layout_mode = 0
-offset_left = -76.0
-offset_top = -62.0
-offset_right = 857.0
-offset_bottom = 543.0
-texture = ExtResource("2_lquwl")
+[node name="Main" type="Node2D" unique_id=12830821 node_paths=PackedStringArray("zona_prohibida")]
+script = ExtResource("1_lquwl")
+meteorito_scene = ExtResource("1_1bvp3")
+meteorito_tiempo_minimo = 2.0
+meteorito_tiempo_maximo = 12.0
+enemigo_scene = ExtResource("5_lquwl")
+enemigo_tiempo_minimo = 0.5
+enemigo_tiempo_maximo = 4.0
+max_enemigos = 25
+zona_prohibida = NodePath("Area2D")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=283604195]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -127.0
-offset_right = 435.0
-offset_bottom = 127.0
-grow_vertical = 2
-theme_override_constants/separation = 40
+[node name="Pause" parent="." unique_id=716386903 instance=ExtResource("4_272bh")]
 
-[node name="Play" type="Button" parent="VBoxContainer" unique_id=956260053]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.9827499, 4.740879e-06, 5.7756904e-07, 1)
-theme_override_fonts/font = ExtResource("6_7mycd")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
-text = "Play"
+[node name="Area2D" type="Area2D" parent="." unique_id=341567404]
+position = Vector2(413.50003, 231.50002)
+collision_layer = 0
+collision_mask = 0
 
-[node name="Options" type="Button" parent="VBoxContainer" unique_id=890192567]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.9827499, 4.740879e-06, 5.7756904e-07, 1)
-theme_override_fonts/font = ExtResource("6_7mycd")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
-text = "Options
-"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1134640629]
+position = Vector2(2, 3.5)
+shape = SubResource("RectangleShape2D_f4g6i")
+debug_color = Color(0, 11.7084, 13.4691, 0.156863)
 
-[node name="leave" type="Button" parent="VBoxContainer" unique_id=423444362]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.9827499, 4.740879e-06, 5.7756904e-07, 1)
-theme_override_fonts/font = ExtResource("6_7mycd")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
-text = "Quit"
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1218771282]
+position = Vector2(413.50003, 231.50002)
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=2110521887]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=37329681]
+z_index = -5
+position = Vector2(415.5, 233.5)
+scale = Vector2(5, 5)
+texture = ExtResource("1_h2yge")
+
+[node name="limites" type="Node2D" parent="." unique_id=1295180307]
+position = Vector2(413.50003, 231.50002)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="limites" unique_id=203950662]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -250)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="limites/StaticBody2D2" unique_id=1278274204]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="limites" unique_id=275093272]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-450, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D3" unique_id=1317340739]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="limites" unique_id=537170906]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(450, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D4" unique_id=1760715465]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="limites" unique_id=827827943]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D" unique_id=878257718]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="ship" parent="." unique_id=808009511 instance=ExtResource("6_272bh")]
+position = Vector2(432.50003, 295.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1489868003]
+metadata/Point = 0
+metadata/kills = 0
+
+[node name="VirtualJoystick" type="VirtualJoystick" parent="CanvasLayer" unique_id=1636368086]
 visible = false
-layout_mode = 0
-offset_left = 218.0
-offset_top = -13.0
-offset_right = 617.0
-offset_bottom = 467.0
-texture = ExtResource("4_7mycd")
-expand_mode = 1
-stretch_mode = 4
+offset_left = 98.0
+offset_top = 357.0
+offset_right = 138.0
+offset_bottom = 397.0
+action_left = &"left"
+action_right = &"right"
+action_up = &"up"
+action_down = &"down"
 
-[node name="Label" type="Label" parent="." unique_id=1662740155]
-layout_mode = 0
-offset_left = 136.0
-offset_top = 338.0
-offset_right = 309.0
-offset_bottom = 380.0
-theme_override_colors/font_color = Color(0.79607844, 0.09411765, 0.09019608, 1)
-theme_override_font_sizes/font_size = 30
-text = "BEST SCORE"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2061259795]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -214.5
-offset_top = -86.0
-offset_right = -97.5
-offset_bottom = -60.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1145302535]
+offset_right = 117.0
+offset_bottom = 26.0
 theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
 
-[node name="Kills" type="Label" parent="HBoxContainer" unique_id=1167409171]
+[node name="Kills" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=949950256]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.85490197, 0.12941177, 0.1254902, 1)
 theme_override_fonts/font = ExtResource("6_7mycd")
 theme_override_font_sizes/font_size = 25
 text = "Kills"
 
-[node name="NK" type="Label" parent="HBoxContainer/Kills" unique_id=1291101895]
+[node name="NK" type="Label" parent="CanvasLayer/HBoxContainer/Kills" unique_id=242531647]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 16.0
 offset_right = 39.0
 offset_bottom = 42.0
-theme_override_colors/font_color = Color(0.85490197, 0.12941177, 0.1254902, 1)
 theme_override_fonts/font = ExtResource("6_7mycd")
 theme_override_font_sizes/font_size = 25
 text = "000"
 
-[node name="Points" type="Label" parent="HBoxContainer" unique_id=749014314]
+[node name="time" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=1130606504]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_7mycd")
+theme_override_font_sizes/font_size = 25
+text = "00:00"
+
+[node name="Timer" type="Timer" parent="CanvasLayer/HBoxContainer" unique_id=1642959334]
+autostart = true
+
+[node name="Points" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=792189287]
 visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_7mycd")
 theme_override_font_sizes/font_size = 25
 text = "Points"
 
-[node name="NP" type="Label" parent="HBoxContainer/Points" unique_id=2099087971]
-visible = false
+[node name="NP" type="Label" parent="CanvasLayer/HBoxContainer/Points" unique_id=1689047233]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 12.0
@@ -148,6 +150,5 @@ theme_override_fonts/font = ExtResource("6_7mycd")
 theme_override_font_sizes/font_size = 25
 text = "000"
 
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/leave" to="." method="_on_leave_pressed"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="timeout" from="CanvasLayer/HBoxContainer/Timer" to="." method="_on_timer_timeout"]
