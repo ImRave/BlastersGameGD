@@ -91,6 +91,17 @@ position = Vector2(432.50003, 295.5)
 metadata/Point = 0
 metadata/kills = 0
 
+[node name="VirtualJoystick" type="VirtualJoystick" parent="CanvasLayer" unique_id=1636368086]
+visible = false
+offset_left = 98.0
+offset_top = 357.0
+offset_right = 138.0
+offset_bottom = 397.0
+action_left = &"left"
+action_right = &"right"
+action_up = &"up"
+action_down = &"down"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1145302535]
 offset_right = 117.0
 offset_bottom = 26.0
