@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://y2nhaj7v4nex" path="res://scripts/remote_bulet.gd" id="1_fkl6f"]
 [ext_resource type="Texture2D" uid="uid://drvnc4tlkwv2l" path="res://accets/bulet.png" id="2_eskns"]
+[ext_resource type="AudioStream" uid="uid://c04cfgq4xhvsc" path="res://accets/sounds/laser_shoot_2.mp3" id="3_y113h"]
 
 [node name="RemoteBulet" type="Node2D" unique_id=1336782315]
 script = ExtResource("1_fkl6f")
@@ -12,3 +13,7 @@ radio_impacto = 5.0
 modulate = Color(0, 1, 0.09411765, 1)
 rotation = 1.5707964
 texture = ExtResource("2_eskns")
+
+[node name="sfx_apear" type="AudioStreamPlayer2D" parent="." unique_id=1221542670]
+stream = ExtResource("3_y113h")
+volume_db = -5.0

@@ -9,7 +9,7 @@ extends Node2D
 @export_category("Enemigos")
 
 @export var enemigo_scene: PackedScene
-@export var enemigo_tiempo_minimo: float = 2.0
+@export var enemigo_tiempo_minimo: float = 1
 @export var enemigo_tiempo_maximo: float = 5.0
 @export var max_enemigos: int = 5
 
@@ -21,14 +21,27 @@ extends Node2D
 @export var zona_prohibida: Area2D
 @export var max_intentos: int = 100
 
+@export_category("Dificultad")
+
+@export var enemigos_iniciales: int = 20
+@export var minutos_aumento_enemigos: int = 1
+@export var aumento_max_enemigos: int = 20
+
+@export var minutos_aumento_velocidad: int = 1
+@export var multiplicador_velocidad_enemigos: float = 1.25
+@export var multiplicador_velocidad_meteoritos: float = 1.05
+
 var enemigos_activos: int = 0
-var kills:int =0
-var total_time_in_secs : int = 0
-var player : bool = true
+var kills: int = 0
+var total_time_in_secs: int = 0
+var player: bool = true
+
+var nivel_dificultad: int = 0
 func _ready() -> void:
 
 	# Comenzar generadores
 	$CanvasLayer/HBoxContainer/Timer.start()
+	$sfx_back.playing = true
 	generar_meteoritos()
 	generar_enemigos()
 
@@ -86,7 +99,28 @@ func generar_enemigos() -> void:
 		await get_tree().create_timer(tiempo_espera).timeout
 
 		if enemigos_activos < max_enemigos:
-			crear_enemigo()
+			# Probabilidad del 5%: aparece la mitad del máximo de una sola vez
+			if randf() < 0.05:
+				var cantidad: int = int(max_enemigos / 2.0)
+				_crear_varios_enemigos(cantidad)
+
+			# Probabilidad del 10%: aparece el 20% del máximo de una sola vez
+			elif randf() < 0.10:
+				var cantidad: int = int(max_enemigos * 0.2)
+				_crear_varios_enemigos(cantidad)
+
+			# Caso normal: aparece un solo enemigo
+			else:
+				crear_enemigo()
+
+
+func _crear_varios_enemigos(cantidad: int) -> void:
+	# Nos aseguramos de no superar el máximo de enemigos activos
+	var espacio_disponible: int = max_enemigos - enemigos_activos
+	var a_crear: int = min(cantidad, espacio_disponible)
+	
+	for i in a_crear:
+		crear_enemigo()
 
 
 func crear_enemigo() -> void:
@@ -112,6 +146,9 @@ func _enemigo_eliminado() -> void:
 	if player == true:
 		kills +=1
 		$CanvasLayer/HBoxContainer/Kills/NK.text = str(kills).pad_zeros(3)
+		$sfx_kill.play()
+		if kills%10==0:
+			$CanvasLayer/sfx_points.play()
 	print(kills)
 	
 	if enemigos_activos < 0:
@@ -201,10 +238,15 @@ func posicion_en_zona_prohibida(posicion: Vector2) -> bool:
 
 
 func _on_timer_timeout() -> void:
+
 	total_time_in_secs += 1
+
 	var m = int(total_time_in_secs / 60.0)
 	var s = total_time_in_secs - m * 60
+
 	$CanvasLayer/HBoxContainer/time.text = '%02d:%02d' % [m, s]
+
+	actualizar_dificultad()
 	
 
 func leer_numero_de_txt(ruta: String) -> int:
@@ -231,6 +273,54 @@ func _on_child_exiting_tree(child: CharacterBody2D) -> void:
 	print(child.name)
 	if child.name == "ship":
 		player = false
+		$sfx_die.play()
+		await get_tree().create_timer(2.5).timeout
 		save()
 		get_tree().change_scene_to_file("res://MainMenu.tscn")
 		queue_free()
+
+func actualizar_dificultad() -> void:
+
+	var minuto_actual: int = int(total_time_in_secs / 60.0)
+
+	# =========================================
+	# CANTIDAD DE ENEMIGOS
+	# =========================================
+
+	var aumentos_enemigos: int = int(
+		minuto_actual / minutos_aumento_enemigos
+	)
+
+	max_enemigos = enemigos_iniciales + (
+		aumentos_enemigos * aumento_max_enemigos
+	)
+
+
+	# =========================================
+	# VELOCIDAD DE APARICIÓN DE ENEMIGOS
+	# =========================================
+
+	var nivel_velocidad_enemigos: int = int(
+		minuto_actual / minutos_aumento_velocidad
+	)
+
+	var multiplicador_enemigos: float = pow(
+		multiplicador_velocidad_enemigos,
+		nivel_velocidad_enemigos
+	)
+
+	enemigo_tiempo_minimo = 2.0 / multiplicador_enemigos
+	enemigo_tiempo_maximo = 5.0 / multiplicador_enemigos
+
+
+	# =========================================
+	# VELOCIDAD DE APARICIÓN DE METEORITOS
+	# =========================================
+
+	var multiplicador_meteoritos: float = pow(
+		multiplicador_velocidad_meteoritos,
+		nivel_velocidad_enemigos
+	)
+
+	meteorito_tiempo_minimo = 0.5 / multiplicador_meteoritos
+	meteorito_tiempo_maximo = 2.0 / multiplicador_meteoritos

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://focmbed3ih3h" path="res://scripts/enemyship.gd" id="1_lv4ox"]
 [ext_resource type="Texture2D" uid="uid://j5q4i8ywcwiw" path="res://accets/EnemyShip.png" id="2_lv4ox"]
 [ext_resource type="PackedScene" uid="uid://ftio3ga3dsgn" path="res://Escenas/point.tscn" id="2_tjafy"]
+[ext_resource type="AudioStream" uid="uid://cm3a3htlv8igw" path="res://accets/sounds/destroy.mp3" id="4_gr58r"]
 
 [node name="enemy" type="CharacterBody2D" unique_id=1207303486]
 collision_layer = 6
@@ -23,6 +24,9 @@ texture = ExtResource("2_lv4ox")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="enemy" unique_id=1300424234]
 position = Vector2(-8, -7)
 polygon = PackedVector2Array(8, 1, 13, 14, 3, 14)
+
+[node name="sfx_detroy" type="AudioStreamPlayer2D" parent="." unique_id=672368409]
+stream = ExtResource("4_gr58r")
 
 [connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="enemy" to="." method="_on_area_2d_area_exited"]

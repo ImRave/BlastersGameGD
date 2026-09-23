@@ -107,6 +107,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func disaper():
 	if point_scene:
+		$sfx_detroy.play()
 		var points = point_scene.instantiate()
 		get_tree().get_current_scene().add_child.call_deferred(points)
 		points.global_position = global_position

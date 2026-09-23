@@ -46,6 +46,7 @@ func _ready():
 	print("Aceleración: ", acceleration)
 	print("Velocidad máxima: ", max_speed)
 	print("Escala: ", scale)
+	$sfx_start.play()
 
 func _physics_process(delta: float) -> void:
 	if stunned:
@@ -95,6 +96,7 @@ func _physics_process(delta: float) -> void:
 	# --- Control de disparo ---
 	if Input.is_action_pressed("shoot"):
 		if can_shoot:
+			$sfx_Shoot.play()
 			shoot_bullet()
 			can_shoot = false
 			shoot_timer = 0.75
@@ -105,6 +107,7 @@ func _physics_process(delta: float) -> void:
 
 	# --- Auto destrucción ---
 	if scale.x <= 0.4:
+		
 		print("Auto-destrucción: escala mínima alcanzada")
 		
 		queue_free()
@@ -122,16 +125,22 @@ func _physics_process(delta: float) -> void:
 		# Resetear variables cuando no hay contacto
 		enemy_contact_timer = 0.0
 		first_contact_processed = false
-
+var t_scale = 0
 # --- 🔹 Control de tamaño y velocidad (MERMA) ---
 func control_scale_velocity_minus() -> void:
 	# Reducir escala
-	scale -= Vector2(0.0175, 0.0175)
 	
-	# Aumentar velocidad y aceleración (para compensar la reducción de tamaño)
-	acceleration += 15
-	max_speed += 15
-	
+	scale -= Vector2(0.017, 0.017)
+	$sfx_sacale_minus.play()
+	if t_scale == 3:
+		# Aumentar velocidad y aceleración (para compensar la reducción de tamaño)
+		acceleration += 10
+		max_speed += 15
+		t_scale = 0
+	t_scale+=1
+	if scale.x<0.25:
+		acceleration += 12500
+		max_speed =20000
 	# Limites mínimos de escala
 	if scale.x < 0.3:
 		scale = Vector2(0.3, 0.3)
@@ -144,8 +153,8 @@ func control_scale_velocity_plus() -> void:
 	scale += Vector2(0.3, 0.3)
 	
 	# Reducir velocidad y aceleración (para balancear el aumento de tamaño)
-	acceleration -= 35
-	max_speed -= 35
+	acceleration -= 50
+	max_speed -= 25
 	
 	# Limites para evitar valores negativos
 	if acceleration < 100:
@@ -199,11 +208,12 @@ func _on_player_area_entered(area: Area2D) -> void:
 		# APLICAR IMPACTO FÍSICO
 		var obstacle_position := area.global_position
 		apply_impact(obstacle_position)
-		
+		$sfx_crash.play()
 		print("💥 CHOQUE CON OBSTÁCULO - Nave aturdida y empujada!")
 		
 	if area.name == "enemy":
 		is_touching_enemy = true
+		
 		print("Contacto con enemigo detectado")
 		
 		# 🔥 PRIMER CONTACTO: Daño inmediato
@@ -219,6 +229,7 @@ func _on_player_area_entered(area: Area2D) -> void:
 		control_scale_velocity_plus()
 		if is_instance_valid(area):
 			area.queue_free()
+		$sfx_point.play()
 		print("Punto recolectado - Escala aumentada")
 
 func _on_player_area_exited(area: Area2D) -> void:

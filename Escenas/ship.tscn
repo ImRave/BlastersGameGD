@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bok14aut1ghb7" path="res://scripts/ship.gd" id="1_4cq66"]
 [ext_resource type="Texture2D" uid="uid://b3g31b0jsifop" path="res://accets/shipbeta2.png" id="2_4cq66"]
+[ext_resource type="AudioStream" uid="uid://s3w7eq42afxb" path="res://accets/sounds/laser_shoot.mp3" id="3_xpyfw"]
+[ext_resource type="AudioStream" uid="uid://2nhl5n88o84e" path="res://accets/sounds/spanw.mp3" id="4_ceas4"]
+[ext_resource type="AudioStream" uid="uid://mj8fv0jeg2wg" path="res://accets/sounds/ship_crash.mp3" id="5_k1g5h"]
+[ext_resource type="AudioStream" uid="uid://c30hb7iqwwewi" path="res://accets/sounds/point _2.mp3" id="6_l3y35"]
+[ext_resource type="AudioStream" uid="uid://cpjqt1bopy3px" path="res://accets/sounds/decrease.mp3" id="7_glweb"]
 
 [sub_resource type="Animation" id="Animation_v4325"]
 length = 0.001
@@ -64,6 +69,28 @@ libraries/ = SubResource("AnimationLibrary_c3vuw")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player" unique_id=267124289]
 position = Vector2(-8, -7)
 polygon = PackedVector2Array(8, 0, 13.5, 14.5, 2.5, 14.5)
+
+[node name="sfx_Shoot" type="AudioStreamPlayer2D" parent="." unique_id=784202920]
+stream = ExtResource("3_xpyfw")
+volume_db = -10.0
+
+[node name="sfx_start" type="AudioStreamPlayer2D" parent="." unique_id=1664621388]
+stream = ExtResource("4_ceas4")
+volume_db = -5.0
+
+[node name="sfx_crash" type="AudioStreamPlayer2D" parent="." unique_id=815807486]
+stream = ExtResource("5_k1g5h")
+volume_db = 5.0
+
+[node name="sfx_point" type="AudioStreamPlayer2D" parent="." unique_id=1680936563]
+stream = ExtResource("6_l3y35")
+volume_db = -5.0
+pitch_scale = 1.25
+
+[node name="sfx_sacale_minus" type="AudioStreamPlayer2D" parent="." unique_id=1626460798]
+stream = ExtResource("7_glweb")
+volume_db = 5.0
+pitch_scale = 0.5
 
 [connection signal="area_entered" from="player" to="." method="_on_player_area_entered"]
 [connection signal="area_exited" from="player" to="." method="_on_player_area_exited"]

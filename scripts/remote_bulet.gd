@@ -15,7 +15,7 @@ func _ready() -> void:
 	print("================================")
 	print("BALA INICIADA")
 	print("================================")
-	
+	$sfx_apear.play()
 	# Buscar enemigos inmediatamente
 	buscar_enemigo()
 	

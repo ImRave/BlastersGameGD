@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ckvtb6qw5clta" path="res://accets/background-0000.jpg" id="2_qoqlk"]
 [ext_resource type="FontFile" uid="uid://doaxshlddkws7" path="res://accets/font/PixelOperator.ttf" id="3_iwfq2"]
 [ext_resource type="Texture2D" uid="uid://l1n814nyxdki" path="res://accets/1810fc8787fa7cd3bf4ca4fcb3635297.jpg" id="4_qoqlk"]
+[ext_resource type="AudioStream" uid="uid://jbj4mb04ibuy" path="res://accets/sounds/Nebulosa Arcade.mp3" id="5_iwfq2"]
+[ext_resource type="AudioStream" uid="uid://2nhl5n88o84e" path="res://accets/sounds/spanw.mp3" id="6_cqjrg"]
+[ext_resource type="AudioStream" uid="uid://denn1tay1q4ja" path="res://accets/sounds/menu.mp3" id="7_e2xy7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmibt"]
 bg_color = Color(1, 0.33333334, 0, 1)
@@ -148,6 +151,21 @@ theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "000"
 
+[node name="sfx_MainMenu" type="AudioStreamPlayer2D" parent="." unique_id=1389503533]
+stream = ExtResource("5_iwfq2")
+volume_db = -10.0
+
+[node name="sfx_PressButons" type="AudioStreamPlayer2D" parent="." unique_id=453463580]
+position = Vector2(0, 270.5)
+stream = ExtResource("7_e2xy7")
+volume_db = -10.0
+
+[node name="sfx_PressStart" type="AudioStreamPlayer2D" parent="." unique_id=1466020357]
+position = Vector2(0, 541)
+stream = ExtResource("6_cqjrg")
+volume_db = -10.0
+
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/leave" to="." method="_on_leave_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/leave" to="." method="_on_leave_pressed"]
