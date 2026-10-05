@@ -17,3 +17,4 @@ texture = ExtResource("2_eskns")
 [node name="sfx_apear" type="AudioStreamPlayer2D" parent="." unique_id=1221542670]
 stream = ExtResource("3_y113h")
 volume_db = -5.0
+bus = &"SFX"

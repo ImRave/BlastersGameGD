@@ -22,6 +22,7 @@ size = Vector2(920.5, 20)
 size = Vector2(25, 500)
 
 [node name="Main" type="Node2D" unique_id=12830821 node_paths=PackedStringArray("zona_prohibida")]
+process_mode = 1
 script = ExtResource("1_lquwl")
 meteorito_scene = ExtResource("1_1bvp3")
 meteorito_tiempo_minimo = 1.0
@@ -159,16 +160,28 @@ text = "000"
 [node name="sfx_points" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=2123128334]
 stream = ExtResource("8_kek77")
 
-[node name="sfx_back" type="AudioStreamPlayer2D" parent="." unique_id=1658527511]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1947739179]
+offset_left = 768.0
+offset_top = 2.0
+offset_right = 818.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("6_7mycd")
+text = "fps: 144"
+horizontal_alignment = 1
+
+[node name="ms_back" type="AudioStreamPlayer2D" parent="." unique_id=1658527511]
 stream = ExtResource("8_5vw27")
 volume_db = -15.0
+bus = &"Music"
 
 [node name="sfx_die" type="AudioStreamPlayer2D" parent="." unique_id=158000584]
 stream = ExtResource("10_efxa6")
 volume_db = 5.0
+bus = &"SFX"
 
 [node name="sfx_kill" type="AudioStreamPlayer2D" parent="." unique_id=1027312463]
 stream = ExtResource("10_4c57u")
+bus = &"SFX"
 
 [node name="limites2" type="CharacterBody2D" parent="." unique_id=2039510792]
 visible = false

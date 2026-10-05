@@ -19,7 +19,9 @@ func _on_point_area_entered(area: Area2D) -> void:
 	if area.name == "player":
 		queue_free()
 		return
-	
+	elif area.name =="enemy":
+		queue_free()
+		return
 	if area.name == "bulet" and not impactado:
 		impactado = true
 		

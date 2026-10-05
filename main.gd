@@ -31,6 +31,8 @@ extends Node2D
 @export var multiplicador_velocidad_enemigos: float = 1.25
 @export var multiplicador_velocidad_meteoritos: float = 1.05
 
+@onready var fps_label: Label = $CanvasLayer/Label
+
 var enemigos_activos: int = 0
 var kills: int = 0
 var total_time_in_secs: int = 0
@@ -38,34 +40,50 @@ var player: bool = true
 
 var nivel_dificultad: int = 0
 func _ready() -> void:
-
 	# Comenzar generadores
 	$CanvasLayer/HBoxContainer/Timer.start()
-	$sfx_back.playing = true
+	$ms_back.playing = true
 	generar_meteoritos()
 	generar_enemigos()
 
+	# Asegurar que el Label arranca en el estado correcto
+	if fps_label:
+		fps_label.visible = Globals.show_fps
+
+
+func _process(_delta: float) -> void:
+	if fps_label == null:
+		return
+	if Globals.show_fps:
+		if not fps_label.visible:
+			fps_label.visible = true
+		fps_label.text = "FPS: %d" % Engine.get_frames_per_second()
+	else:
+		if fps_label.visible:
+			fps_label.visible = false
+
+	
 	
 # =========================================================
 # METEORITOS
 # =========================================================
 
 func generar_meteoritos() -> void:
-
+	
 	if meteorito_scene == null:
 		push_error("No se ha asignado meteorito_scene.")
 		return
 
 	while true:
-
+		
 		var tiempo_espera: float = randf_range(
 			meteorito_tiempo_minimo,
 			meteorito_tiempo_maximo
 		)
 
 		await get_tree().create_timer(tiempo_espera).timeout
-
-		crear_meteorito()
+		if $Pause.paused != true: 
+			crear_meteorito()
 
 
 func crear_meteorito() -> void:

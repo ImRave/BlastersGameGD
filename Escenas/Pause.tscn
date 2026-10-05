@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://br317spoj8cnx" path="res://Escenas/pause.gd" id="1_xc6bg"]
 [ext_resource type="FontFile" uid="uid://doaxshlddkws7" path="res://accets/font/PixelOperator.ttf" id="2_pl4ng"]
-[ext_resource type="Texture2D" uid="uid://l1n814nyxdki" path="res://accets/1810fc8787fa7cd3bf4ca4fcb3635297.jpg" id="3_pl4ng"]
+[ext_resource type="PackedScene" uid="uid://c07mxifghqoti" path="res://Escenas/Settings.tscn" id="4_1viqi"]
+[ext_resource type="AudioStream" uid="uid://denn1tay1q4ja" path="res://accets/sounds/menu.mp3" id="5_kmqix"]
 
 [node name="Pause" type="CanvasLayer" unique_id=716386903]
 process_mode = 3
@@ -24,22 +25,42 @@ grow_vertical = 2
 color = Color(0.16862746, 0, 0.12941177, 0.29411766)
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1236364123]
+[node name="OptionsMenu" parent="." unique_id=1750873264 instance=ExtResource("4_1viqi")]
+visible = false
+offset_left = 44.0
+offset_top = 45.0
+offset_right = 47.0
+offset_bottom = 45.0
+
+[node name="sfx_PressButons" type="AudioStreamPlayer2D" parent="." unique_id=1355254706]
+position = Vector2(0, 270.5)
+stream = ExtResource("5_kmqix")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="PauseMenu" type="Control" parent="." unique_id=1327924370]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu" unique_id=1236364123]
 process_mode = 2
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -99.5
-offset_right = 141.0
-offset_bottom = 99.5
+offset_left = 250.5
+offset_top = 112.0
+offset_right = 532.5
+offset_bottom = 311.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 25
 
-[node name="Resume" type="Button" parent="VBoxContainer" unique_id=978002423]
+[node name="Resume" type="Button" parent="PauseMenu/VBoxContainer" unique_id=978002423]
 process_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -48,7 +69,7 @@ theme_override_fonts/font = ExtResource("2_pl4ng")
 theme_override_font_sizes/font_size = 40
 text = "Resume"
 
-[node name="Options" type="Button" parent="VBoxContainer" unique_id=1771332428]
+[node name="Options" type="Button" parent="PauseMenu/VBoxContainer" unique_id=1771332428]
 process_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -57,7 +78,7 @@ theme_override_fonts/font = ExtResource("2_pl4ng")
 theme_override_font_sizes/font_size = 40
 text = "Options"
 
-[node name="Quit" type="Button" parent="VBoxContainer" unique_id=716661984]
+[node name="Quit" type="Button" parent="PauseMenu/VBoxContainer" unique_id=716661984]
 process_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -66,16 +87,6 @@ theme_override_fonts/font = ExtResource("2_pl4ng")
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=1249270013]
-visible = false
-offset_left = 218.0
-offset_top = -13.0
-offset_right = 617.0
-offset_bottom = 467.0
-texture = ExtResource("3_pl4ng")
-expand_mode = 1
-stretch_mode = 4
-
-[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

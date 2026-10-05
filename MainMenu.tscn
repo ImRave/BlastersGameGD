@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://dk0dky6rjo06t"]
 
 [ext_resource type="Script" uid="uid://frt4tl3rw1ky" path="res://main_menu.gd" id="1_h7a2f"]
-[ext_resource type="Texture2D" uid="uid://ckvtb6qw5clta" path="res://accets/background-0000.jpg" id="2_qoqlk"]
 [ext_resource type="FontFile" uid="uid://doaxshlddkws7" path="res://accets/font/PixelOperator.ttf" id="3_iwfq2"]
-[ext_resource type="Texture2D" uid="uid://l1n814nyxdki" path="res://accets/1810fc8787fa7cd3bf4ca4fcb3635297.jpg" id="4_qoqlk"]
+[ext_resource type="Texture2D" uid="uid://lgaq7or8aeba" path="res://accets/unselect.png" id="4_e2xy7"]
 [ext_resource type="AudioStream" uid="uid://jbj4mb04ibuy" path="res://accets/sounds/Nebulosa Arcade.mp3" id="5_iwfq2"]
 [ext_resource type="AudioStream" uid="uid://2nhl5n88o84e" path="res://accets/sounds/spanw.mp3" id="6_cqjrg"]
 [ext_resource type="AudioStream" uid="uid://denn1tay1q4ja" path="res://accets/sounds/menu.mp3" id="7_e2xy7"]
+[ext_resource type="Texture2D" uid="uid://di2dagg25atdd" path="res://accets/particle.png" id="8_e2xy7"]
+[ext_resource type="PackedScene" uid="uid://c07mxifghqoti" path="res://Escenas/Settings.tscn" id="8_fimr5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmibt"]
 bg_color = Color(1, 0.33333334, 0, 1)
@@ -20,6 +21,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h7a2f")
 
+[node name="ms_MainMenu" type="AudioStreamPlayer2D" parent="." unique_id=1389503533]
+stream = ExtResource("5_iwfq2")
+volume_db = -10.0
+bus = &"Music"
+
+[node name="sfx_PressButons" type="AudioStreamPlayer2D" parent="." unique_id=453463580]
+position = Vector2(0, 270.5)
+stream = ExtResource("7_e2xy7")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="sfx_PressStart" type="AudioStreamPlayer2D" parent="." unique_id=1466020357]
+position = Vector2(0, 541)
+stream = ExtResource("6_cqjrg")
+volume_db = -10.0
+bus = &"SFX"
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2056902678]
 layout_mode = 0
 offset_left = -43.0
@@ -28,144 +46,180 @@ offset_right = 853.0
 offset_bottom = 522.0
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=731098159]
-layout_mode = 0
-offset_left = -76.0
-offset_top = -62.0
-offset_right = 857.0
-offset_bottom = 543.0
-texture = ExtResource("2_qoqlk")
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=971287201]
+position = Vector2(-92, 246)
+amount = 25
+texture = ExtResource("8_e2xy7")
+lifetime = 4.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(50, 275)
+spread = 134.15
+gravity = Vector2(200, 0)
+initial_velocity_min = 8.1
+initial_velocity_max = 8.1
+radial_accel_min = -2.05
+tangential_accel_min = -16.04
+damping_min = 65.566
+damping_max = 65.566
+angle_min = -558.3
+angle_max = -32.3
+scale_amount_min = 0.5
+scale_amount_max = 1.5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=283604195]
+[node name="MainMenu" type="Control" parent="." unique_id=25772913]
+anchors_preset = 0
+offset_left = 42.0
+offset_top = 22.0
+offset_right = 82.0
+offset_bottom = 62.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=283604195]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -127.0
-offset_right = 435.0
-offset_bottom = 127.0
+offset_left = -19.0
+offset_top = 62.5
+offset_right = 393.0
+offset_bottom = 316.5
 grow_vertical = 2
 theme_override_constants/separation = 40
 
-[node name="Play" type="Button" parent="VBoxContainer" unique_id=956260053]
+[node name="Play" type="Button" parent="MainMenu/VBoxContainer" unique_id=956260053]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.9827499, 4.740879e-06, 5.7756904e-07, 1)
+theme_override_colors/font_hover_color = Color(0.96677583, 0.44958144, 0.44606775, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 34
+theme_override_icons/icon = ExtResource("4_e2xy7")
 theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
 text = "Play"
+flat = true
+alignment = 0
 
-[node name="Options" type="Button" parent="VBoxContainer" unique_id=890192567]
+[node name="Options" type="Button" parent="MainMenu/VBoxContainer" unique_id=890192567]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.9827499, 4.740879e-06, 5.7756904e-07, 1)
+theme_override_colors/font_hover_color = Color(0.96677583, 0.44958144, 0.44606775, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 34
+theme_override_icons/icon = ExtResource("4_e2xy7")
 theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
 text = "Options
 "
+flat = true
+alignment = 0
 
-[node name="leave" type="Button" parent="VBoxContainer" unique_id=423444362]
+[node name="leave" type="Button" parent="MainMenu/VBoxContainer" unique_id=423444362]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.9827499, 4.740879e-06, 5.7756904e-07, 1)
+theme_override_colors/font_hover_color = Color(0.96677583, 0.44958144, 0.44606775, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 34
+theme_override_icons/icon = ExtResource("4_e2xy7")
 theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
 text = "Quit"
+flat = true
+alignment = 0
 
-[node name="TextureRect2" type="TextureRect" parent="." unique_id=2110521887]
-visible = false
-layout_mode = 0
-offset_left = 218.0
-offset_top = -13.0
-offset_right = 617.0
-offset_bottom = 467.0
-texture = ExtResource("4_qoqlk")
-expand_mode = 1
-stretch_mode = 4
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenu" unique_id=1221289585]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 567.0
+offset_top = -26.0
+offset_right = 740.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="." unique_id=1662740155]
-layout_mode = 0
-offset_left = 136.0
-offset_top = 338.0
-offset_right = 309.0
-offset_bottom = 380.0
-theme_override_colors/font_color = Color(0.79607844, 0.09411765, 0.09019608, 1)
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer2" unique_id=1662740155]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 30
 text = "BEST SCORE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2061259795]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -214.5
-offset_top = -86.0
-offset_right = -97.5
-offset_bottom = -60.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 20
-
-[node name="Kills" type="Label" parent="HBoxContainer" unique_id=1167409171]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer2" unique_id=2061259795]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.85490197, 0.12941177, 0.1254902, 1)
+theme_override_constants/separation = 20
+
+[node name="Kills" type="Label" parent="MainMenu/VBoxContainer2/HBoxContainer" unique_id=1167409171]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "Kills"
 
-[node name="NK" type="Label" parent="HBoxContainer/Kills" unique_id=1291101895]
+[node name="NK" type="Label" parent="MainMenu/VBoxContainer2/HBoxContainer/Kills" unique_id=1291101895]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 16.0
 offset_right = 39.0
 offset_bottom = 42.0
-theme_override_colors/font_color = Color(0.85490197, 0.12941177, 0.1254902, 1)
+theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "000"
 
-[node name="Points" type="Label" parent="HBoxContainer" unique_id=749014314]
+[node name="Points" type="Label" parent="MainMenu/VBoxContainer2/HBoxContainer" unique_id=749014314]
 visible = false
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "Points"
 
-[node name="NP" type="Label" parent="HBoxContainer/Points" unique_id=2099087971]
+[node name="NP" type="Label" parent="MainMenu/VBoxContainer2/HBoxContainer/Points" unique_id=2099087971]
 visible = false
 layout_mode = 0
 offset_left = 10.0
 offset_top = 12.0
 offset_right = 33.0
 offset_bottom = 29.0
+theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "000"
 
-[node name="sfx_MainMenu" type="AudioStreamPlayer2D" parent="." unique_id=1389503533]
-stream = ExtResource("5_iwfq2")
-volume_db = -10.0
+[node name="Label" type="Label" parent="." unique_id=218654336]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 15.0
+offset_right = 305.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0.95041233, 0, 0.16271758, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 75
+text = "BLASTERS"
 
-[node name="sfx_PressButons" type="AudioStreamPlayer2D" parent="." unique_id=453463580]
-position = Vector2(0, 270.5)
-stream = ExtResource("7_e2xy7")
-volume_db = -10.0
+[node name="OptionsMenu" parent="." unique_id=1750873264 instance=ExtResource("8_fimr5")]
+visible = false
+layout_mode = 1
+offset_left = 4.0
+offset_top = 56.0
+offset_right = 7.0
+offset_bottom = 56.0
 
-[node name="sfx_PressStart" type="AudioStreamPlayer2D" parent="." unique_id=1466020357]
-position = Vector2(0, 541)
-stream = ExtResource("6_cqjrg")
-volume_db = -10.0
-
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer/leave" to="." method="_on_leave_mouse_entered"]
-[connection signal="pressed" from="VBoxContainer/leave" to="." method="_on_leave_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/VBoxContainer/Play" to="." method="_on_play_mouse_exited"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/VBoxContainer/Options" to="." method="_on_options_mouse_exited"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/leave" to="." method="_on_leave_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/VBoxContainer/leave" to="." method="_on_leave_mouse_exited"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/leave" to="." method="_on_leave_pressed"]

@@ -67,8 +67,8 @@ func _physics_process(delta: float) -> void:
 			return  # Salir temprano si está aturdido
 
 	# --- Entrada de movimiento ---
-	var turn_dir := Input.get_axis("left", "right")
-	var move_dir := Input.get_axis("down", "up")
+	var turn_dir := Input.get_axis("move_left", "move_right")
+	var move_dir := Input.get_axis("move_down", "move_up")
 
 	# --- Rotación ---
 	if turn_dir != 0.0:

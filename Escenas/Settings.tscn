@@ -1,0 +1,252 @@
+[gd_scene format=3 uid="uid://c07mxifghqoti"]
+
+[ext_resource type="Script" uid="uid://cf44ubykgm0r2" path="res://scripts/options_menu.gd" id="1_siifw"]
+[ext_resource type="FontFile" uid="uid://doaxshlddkws7" path="res://accets/font/PixelOperator.ttf" id="2_7grwk"]
+[ext_resource type="Texture2D" uid="uid://l1n814nyxdki" path="res://accets/1810fc8787fa7cd3bf4ca4fcb3635297.jpg" id="2_t1l7g"]
+[ext_resource type="AudioStream" uid="uid://denn1tay1q4ja" path="res://accets/sounds/menu.mp3" id="3_7grwk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftxvd"]
+bg_color = Color(0.92941177, 0, 0.2901961, 0.19215687)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.92941177, 0, 0.2901961, 0.7254902)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.92941177, 0, 0.2901961, 0.14901961)
+
+[node name="OptionsMenu" type="Control" unique_id=1750873264]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_siifw")
+
+[node name="Panel" type="Panel" parent="." unique_id=439968601]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 34.0
+offset_right = 695.0
+offset_bottom = 366.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ftxvd")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1782505063]
+layout_mode = 0
+offset_right = 652.0
+offset_bottom = 331.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=984461692]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer/VBox" unique_id=1512218650]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+current_tab = 0
+
+[node name="Video" type="VBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer" unique_id=542722026]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBox" type="VBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer/Video" unique_id=675037359]
+layout_mode = 2
+
+[node name="FPSRow" type="HBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox" unique_id=1657001709]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="FPSCheck" type="CheckBox" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox/FPSRow" unique_id=235661132]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Mostrar FPS"
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox/FPSRow" unique_id=1853268588]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Limitar FPS"
+
+[node name="FPSOption" type="OptionButton" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox/FPSRow" unique_id=1111521556]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="FullscreenCheck" type="CheckBox" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox" unique_id=1529434943]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Pantalla completa"
+
+[node name="BrightnessRow" type="HBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox" unique_id=855662333]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox/BrightnessRow" unique_id=1710219208]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Brillo"
+
+[node name="BrightnessSlider" type="HSlider" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox/BrightnessRow" unique_id=273362818]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="ValueLabel" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Video/VBox/BrightnessRow" unique_id=1981753433]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="MoreButton" type="Button" parent="Panel/MarginContainer/VBox/TabContainer/Video" unique_id=110968656]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Más opciones"
+
+[node name="Controles" type="VBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer" unique_id=1871897915]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Grid" type="GridContainer" parent="Panel/MarginContainer/VBox/TabContainer/Controles" unique_id=247842588]
+layout_mode = 2
+columns = 2
+
+[node name="Label up" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=270831585]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Arriba"
+
+[node name="UpButton" type="Button" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=1693684203]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="Label downm" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=522868160]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Abajo"
+
+[node name="DownButton" type="Button" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=1283544755]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="Label left" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=972931797]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Izquierda"
+
+[node name="LeftButton" type="Button" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=2073872483]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="Label right" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=2005068495]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Deracha"
+
+[node name="RightButton" type="Button" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=1981544097]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="Label shoot" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=1971334975]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Disparar"
+
+[node name="ShootButton" type="Button" parent="Panel/MarginContainer/VBox/TabContainer/Controles/Grid" unique_id=1872216000]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="MouseShootCheck" type="CheckBox" parent="Panel/MarginContainer/VBox/TabContainer/Controles" unique_id=1750223020]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Click izquierdo para disparar"
+
+[node name="Audio" type="VBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer" unique_id=1363463174]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer/Audio" unique_id=244658302]
+layout_mode = 2
+
+[node name="MasterRow" type="HBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox" unique_id=1959190125]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/MasterRow" unique_id=585567091]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Volumen general"
+
+[node name="MasterSlider" type="HSlider" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/MasterRow" unique_id=2078303390]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/MasterRow" unique_id=808558257]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="MusicRow" type="HBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox" unique_id=400186558]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/MusicRow" unique_id=1690101454]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Música"
+
+[node name="MusicSlider" type="HSlider" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/MusicRow" unique_id=937669084]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/MusicRow" unique_id=75114273]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="SFXRow" type="HBoxContainer" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox" unique_id=1092348831]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/SFXRow" unique_id=1049251279]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Efectos"
+
+[node name="SFXSlider" type="HSlider" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/SFXRow" unique_id=735986236]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="Panel/MarginContainer/VBox/TabContainer/Audio/VBox/SFXRow" unique_id=814936663]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_7grwk")
+
+[node name="BackButton" type="Button" parent="Panel/MarginContainer" unique_id=992783101]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_7grwk")
+text = "Volver"
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1180708173]
+visible = false
+layout_mode = 0
+offset_left = 218.0
+offset_top = -13.0
+offset_right = 617.0
+offset_bottom = 467.0
+texture = ExtResource("2_t1l7g")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="sfx_PressButons" type="AudioStreamPlayer2D" parent="." unique_id=514251809]
+position = Vector2(218, 257.5)
+stream = ExtResource("3_7grwk")
+volume_db = -10.0
+bus = &"SFX"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBox/TabContainer/Video/MoreButton" to="." method="_on_more_button_pressed"]
