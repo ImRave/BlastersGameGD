@@ -28,7 +28,7 @@ func _on_leave_pressed() -> void:
 	$sfx_PressButons.playing =true
 	await get_tree().create_timer(0.2).timeout
 	if OS.get_name() == "Web":
-		JavaScriptBridge.eval("window.location.href='blasters.imrave.site'")
+		JavaScriptBridge.eval("window.location.href='https://blasters.imrave.site/'")
 	else:
 		get_tree().quit()
 
