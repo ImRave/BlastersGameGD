@@ -117,6 +117,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Kills" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=949950256]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
 theme_override_fonts/font = ExtResource("6_7mycd")
 theme_override_font_sizes/font_size = 25
 text = "Kills"
@@ -127,12 +128,14 @@ offset_left = 6.0
 offset_top = 16.0
 offset_right = 39.0
 offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
 theme_override_fonts/font = ExtResource("6_7mycd")
 theme_override_font_sizes/font_size = 25
 text = "000"
 
 [node name="time" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=1130606504]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
 theme_override_fonts/font = ExtResource("6_7mycd")
 theme_override_font_sizes/font_size = 25
 text = "00:00"
@@ -165,6 +168,7 @@ offset_left = 768.0
 offset_top = 2.0
 offset_right = 818.0
 offset_bottom = 25.0
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
 theme_override_fonts/font = ExtResource("6_7mycd")
 text = "fps: 144"
 horizontal_alignment = 1

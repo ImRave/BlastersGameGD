@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://d0l7dwwnotusx"]
+
+[ext_resource type="Script" uid="uid://lfl0266j4fmu" path="res://scripts/tutorial.gd" id="1_g3458"]
+[ext_resource type="PackedScene" uid="uid://bnehno84aww5t" path="res://Escenas/ship.tscn" id="1_romg6"]
+[ext_resource type="PackedScene" uid="uid://bgi58tuh8xcan" path="res://Escenas/obstacle.tscn" id="2_6r1g1"]
+[ext_resource type="Texture2D" uid="uid://bw2iyjlidakvr" path="res://accets/fondo.png" id="2_asoss"]
+[ext_resource type="PackedScene" uid="uid://bdj3ogf2mmtrp" path="res://Escenas/enemyship.tscn" id="3_2tfkj"]
+[ext_resource type="Texture2D" uid="uid://cbkqn857ypsoc" path="res://accets/w_key-Sheet.png" id="3_g3458"]
+[ext_resource type="Texture2D" uid="uid://5aeyrasaglff" path="res://accets/scape_key-Sheet.png" id="4_02tu6"]
+[ext_resource type="Script" uid="uid://cmaiihcuod43b" path="res://scripts/press_key.gd" id="4_asoss"]
+[ext_resource type="Texture2D" uid="uid://dk3efa5bbf1k8" path="res://accets/s_key-Sheet.png" id="5_dcqio"]
+[ext_resource type="Texture2D" uid="uid://cbesfxqr0mb8n" path="res://accets/d_key-Sheet.png" id="6_1pkg7"]
+[ext_resource type="Texture2D" uid="uid://x2b35w3f7nra" path="res://accets/a_key-Sheet.png" id="7_6m1n7"]
+[ext_resource type="FontFile" uid="uid://doaxshlddkws7" path="res://accets/font/PixelOperator.ttf" id="10_02tu6"]
+[ext_resource type="Texture2D" uid="uid://yxj2ilhscoxu" path="res://accets/marco.png" id="11_6m1n7"]
+[ext_resource type="AudioStream" uid="uid://bdsi58ao8hicm" path="res://accets/sounds/text.mp3" id="11_dcqio"]
+[ext_resource type="AudioStream" uid="uid://dwos5dyf00q8n" path="res://accets/sounds/tutorial_step.mp3" id="12_1pkg7"]
+[ext_resource type="AudioStream" uid="uid://denn1tay1q4ja" path="res://accets/sounds/menu.mp3" id="15_2tfkj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6m1n7"]
+size = Vector2(920.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5y8fd"]
+size = Vector2(25, 500)
+
+[node name="Tutorial" type="Node2D" unique_id=932992247 node_paths=PackedStringArray("spanw_poins", "rect_salida")]
+script = ExtResource("1_g3458")
+opstacles = ExtResource("2_6r1g1")
+enemies = ExtResource("3_2tfkj")
+dodged_opstacles = 5
+spanw_poins = [NodePath("spanw poins/1"), NodePath("spanw poins/2"), NodePath("spanw poins/3"), NodePath("spanw poins/4"), NodePath("spanw poins/5")]
+escena_principal = "uid://c24uymlu3oc6b"
+escena_menu = "uid://dk0dky6rjo06t"
+rect_salida = NodePath("esc_color")
+alpha_maximo = 0.9
+
+[node name="esc_color" type="ColorRect" parent="." unique_id=2131534492]
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 0.22352941)
+
+[node name="Label" type="Label" parent="esc_color" unique_id=1424198607]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -8.0
+offset_right = 11.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_02tu6")
+text = "ESC"
+
+[node name="ship" parent="." unique_id=339937601 instance=ExtResource("1_romg6")]
+position = Vector2(408.00003, 312)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1678542805]
+z_index = -5
+position = Vector2(415.5, 233.5)
+scale = Vector2(5, 5)
+texture = ExtResource("2_asoss")
+
+[node name="Teclas" type="Node2D" parent="." unique_id=1594668213]
+position = Vector2(409, 86)
+scale = Vector2(4, 4)
+
+[node name="w" type="Sprite2D" parent="Teclas" unique_id=1021049388]
+position = Vector2(0, -9.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_g3458")
+hframes = 2
+script = ExtResource("4_asoss")
+tecla_animacion = 87
+
+[node name="space" type="Sprite2D" parent="Teclas" unique_id=1741146869]
+position = Vector2(0, 12.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_02tu6")
+hframes = 2
+script = ExtResource("4_asoss")
+
+[node name="s" type="Sprite2D" parent="Teclas" unique_id=1139101856]
+position = Vector2(0, 1.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_dcqio")
+hframes = 2
+script = ExtResource("4_asoss")
+tecla_animacion = 83
+
+[node name="d" type="Sprite2D" parent="Teclas" unique_id=913750417]
+position = Vector2(12.25, 1.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_1pkg7")
+hframes = 2
+script = ExtResource("4_asoss")
+tecla_animacion = 68
+
+[node name="a" type="Sprite2D" parent="Teclas" unique_id=591367805]
+position = Vector2(-12, 1.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_6m1n7")
+hframes = 2
+script = ExtResource("4_asoss")
+tecla_animacion = 65
+
+[node name="Control" type="Control" parent="." unique_id=1225588690]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 41.0
+offset_bottom = 43.0
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1053243924]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 160.0
+offset_right = 502.0
+offset_bottom = 248.0
+color = Color(1, 0, 0, 0.09803922)
+
+[node name="text" type="Label" parent="Control/ColorRect" unique_id=1326823855]
+custom_minimum_size = Vector2(0.1, 0.1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_02tu6")
+text = "weqesda"
+autowrap_mode = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Control" unique_id=1167441719]
+modulate = Color(0.25882354, 0, 0, 1)
+position = Vector2(408.5, 203.5)
+scale = Vector2(1.947917, 1.3906249)
+texture = ExtResource("11_6m1n7")
+
+[node name="sfx_letter" type="AudioStreamPlayer2D" parent="." unique_id=171538803]
+stream = ExtResource("11_dcqio")
+bus = &"SFX"
+
+[node name="sfx_butom" type="AudioStreamPlayer2D" parent="." unique_id=131693167]
+stream = ExtResource("15_2tfkj")
+bus = &"SFX"
+
+[node name="sfx_steps" type="AudioStreamPlayer2D" parent="." unique_id=432555980]
+stream = ExtResource("12_1pkg7")
+bus = &"SFX"
+
+[node name="limites" type="Node2D" parent="." unique_id=1324962636]
+position = Vector2(407, 229)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="limites" unique_id=118683285]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -250)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="limites/StaticBody2D2" unique_id=165492261]
+shape = SubResource("RectangleShape2D_6m1n7")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="limites" unique_id=1120384090]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-450, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D3" unique_id=525303149]
+shape = SubResource("RectangleShape2D_5y8fd")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="limites" unique_id=135259798]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(450, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D4" unique_id=1232431423]
+shape = SubResource("RectangleShape2D_5y8fd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="limites" unique_id=127980927]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="limites/StaticBody2D" unique_id=826453738]
+shape = SubResource("RectangleShape2D_6m1n7")
+
+[node name="spanw poins" type="Node2D" parent="." unique_id=248614635]
+position = Vector2(0, 18)
+
+[node name="1" type="Node2D" parent="spanw poins" unique_id=1568518418]
+position = Vector2(832, 0)
+
+[node name="2" type="Node2D" parent="spanw poins" unique_id=1106894719]
+position = Vector2(0, 425)
+
+[node name="3" type="Node2D" parent="spanw poins" unique_id=906549352]
+position = Vector2(833, 433)
+
+[node name="4" type="Node2D" parent="spanw poins" unique_id=289461981]
+
+[node name="5" type="Node2D" parent="spanw poins" unique_id=1632661876]
+position = Vector2(413, -11)

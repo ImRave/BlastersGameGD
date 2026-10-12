@@ -80,18 +80,18 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = -19.0
-offset_top = 62.5
+offset_top = 59.0
 offset_right = 393.0
-offset_bottom = 316.5
+offset_bottom = 351.0
 grow_vertical = 2
 theme_override_constants/separation = 40
 
 [node name="Play" type="Button" parent="MainMenu/VBoxContainer" unique_id=956260053]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.96677583, 0.44958144, 0.44606775, 1)
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.29411766, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.6620945, 0.6093973, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 34
 theme_override_icons/icon = ExtResource("4_e2xy7")
@@ -100,12 +100,23 @@ text = "Play"
 flat = true
 alignment = 0
 
+[node name="title" type="Label" parent="MainMenu/VBoxContainer/Play" unique_id=1780682013]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 1.5
+offset_right = 289.0
+offset_bottom = 77.5
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 34
+text = "Play"
+
 [node name="Options" type="Button" parent="MainMenu/VBoxContainer" unique_id=890192567]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.96677583, 0.44958144, 0.44606775, 1)
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.29411766, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.6620945, 0.6093973, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 34
 theme_override_icons/icon = ExtResource("4_e2xy7")
@@ -115,12 +126,23 @@ text = "Options
 flat = true
 alignment = 0
 
+[node name="title" type="Label" parent="MainMenu/VBoxContainer/Options" unique_id=1603035986]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 1.5
+offset_right = 289.0
+offset_bottom = 77.5
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 34
+text = "Options"
+
 [node name="leave" type="Button" parent="MainMenu/VBoxContainer" unique_id=423444362]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 0.21568628, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.96677583, 0.44958144, 0.44606775, 1)
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.29411766, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.6620945, 0.6093973, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 34
 theme_override_icons/icon = ExtResource("4_e2xy7")
@@ -128,6 +150,43 @@ theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
 text = "Quit"
 flat = true
 alignment = 0
+
+[node name="title" type="Label" parent="MainMenu/VBoxContainer/leave" unique_id=118113081]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 1.5
+offset_right = 289.0
+offset_bottom = 77.5
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 34
+text = "Quit"
+
+[node name="Tutorial" type="Button" parent="MainMenu/VBoxContainer" unique_id=723259358]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.29411766, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.6620945, 0.6093973, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 34
+theme_override_icons/icon = ExtResource("4_e2xy7")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_mmibt")
+text = "Tutorial"
+flat = true
+alignment = 0
+
+[node name="title" type="Label" parent="MainMenu/VBoxContainer/Tutorial" unique_id=930066378]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 1.5
+offset_right = 289.0
+offset_bottom = 77.5
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 34
+text = "Tutorial
+"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MainMenu" unique_id=1221289585]
 layout_mode = 1
@@ -146,7 +205,19 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="MainMenu/VBoxContainer2" unique_id=1662740155]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
+theme_override_colors/font_color = Color(0.29411766, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 30
+text = "BEST SCORE"
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer2/Label" unique_id=376176037]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 128.0
+offset_bottom = 29.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 30
 text = "BEST SCORE"
@@ -159,7 +230,7 @@ theme_override_constants/separation = 20
 [node name="Kills" type="Label" parent="MainMenu/VBoxContainer2/HBoxContainer" unique_id=1167409171]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "Kills"
@@ -170,7 +241,7 @@ offset_left = 6.0
 offset_top = 16.0
 offset_right = 39.0
 offset_bottom = 42.0
-theme_override_colors/font_color = Color(0.9722455, 0.5337832, 0.514298, 1)
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
 theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "000"
@@ -195,17 +266,6 @@ theme_override_fonts/font = ExtResource("3_iwfq2")
 theme_override_font_sizes/font_size = 25
 text = "000"
 
-[node name="Label" type="Label" parent="." unique_id=218654336]
-layout_mode = 0
-offset_left = 42.0
-offset_top = 15.0
-offset_right = 305.0
-offset_bottom = 91.0
-theme_override_colors/font_color = Color(0.95041233, 0, 0.16271758, 1)
-theme_override_fonts/font = ExtResource("3_iwfq2")
-theme_override_font_sizes/font_size = 75
-text = "BLASTERS"
-
 [node name="OptionsMenu" parent="." unique_id=1750873264 instance=ExtResource("8_fimr5")]
 visible = false
 layout_mode = 1
@@ -213,6 +273,33 @@ offset_left = 4.0
 offset_top = 56.0
 offset_right = 7.0
 offset_bottom = 56.0
+
+[node name="Title" type="Control" parent="." unique_id=166390689]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="title" type="Label" parent="Title" unique_id=1410807427]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 18.0
+offset_right = 301.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(0.29411766, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 75
+text = "BLASTERS"
+
+[node name="titlemain" type="Label" parent="Title" unique_id=218654336]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 15.0
+offset_right = 305.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(0.9490196, 0, 0.16078432, 1)
+theme_override_fonts/font = ExtResource("3_iwfq2")
+theme_override_font_sizes/font_size = 75
+text = "BLASTERS"
 
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="mouse_exited" from="MainMenu/VBoxContainer/Play" to="." method="_on_play_mouse_exited"]
@@ -223,3 +310,6 @@ offset_bottom = 56.0
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/leave" to="." method="_on_leave_mouse_entered"]
 [connection signal="mouse_exited" from="MainMenu/VBoxContainer/leave" to="." method="_on_leave_mouse_exited"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/leave" to="." method="_on_leave_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/Tutorial" to="." method="_on_tutorial_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/VBoxContainer/Tutorial" to="." method="_on_tutorial_mouse_exited"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]

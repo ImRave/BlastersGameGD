@@ -126,44 +126,47 @@ func _physics_process(delta: float) -> void:
 		enemy_contact_timer = 0.0
 		first_contact_processed = false
 var t_scale = 0
-# --- 🔹 Control de tamaño y velocidad (MERMA) ---
+# --- 🔹 Control de tamaño y velocidad (REDUCCIÓN) ---
 func control_scale_velocity_minus() -> void:
 	# Reducir escala
-	
 	scale -= Vector2(0.017, 0.017)
-	$sfx_sacale_minus.play()
-	if t_scale == 3:
-		# Aumentar velocidad y aceleración (para compensar la reducción de tamaño)
-		acceleration += 10
-		max_speed += 15
-		t_scale = 0
-	t_scale+=1
-	if scale.x<0.25:
-		acceleration += 12500
-		max_speed =20000
-	# Limites mínimos de escala
+	
+	# Límites mínimos de escala
 	if scale.x < 0.3:
 		scale = Vector2(0.3, 0.3)
+		
+	$sfx_sacale_minus.play()
 	
-	print("Merma aplicada - Escala: ", scale, " | Aceleración: ", acceleration, " | Vel. Máx: ", max_speed)
+	# Actualizar aceleración y velocidad máxima con las funciones matemáticas
+	update_velocity_based_on_scale()
+	
+	print("Merma aplicada - Escala: ", scale.x, " | Aceleración: ", acceleration, " | Vel. Máx: ", max_speed)
+
 
 # --- 🔹 Control de tamaño y velocidad (AUMENTO) ---
 func control_scale_velocity_plus() -> void:
 	# Aumentar escala
 	scale += Vector2(0.3, 0.3)
 	
-	# Reducir velocidad y aceleración (para balancear el aumento de tamaño)
-	acceleration -= 50
-	max_speed -= 25
+	# Limite máximo opcional (puedes ajustarlo si tienes un tope superior, por ejemplo 2.0)
+	if scale.x > 2.0:
+		scale = Vector2(2.0, 2.0)
 	
-	# Limites para evitar valores negativos
-	if acceleration < 100:
-		acceleration = 100
-	if max_speed < 50000:
-		max_speed = 50000
+	# Actualizar aceleración y velocidad máxima con las funciones matemáticas
+	update_velocity_based_on_scale()
 	
-	print("Aumento aplicado - Escala: ", scale, " | Aceleración: ", acceleration, " | Vel. Máx: ", max_speed)
+	print("Aumento aplicado - Escala: ", scale.x, " | Aceleración: ", acceleration, " | Vel. Máx: ", max_speed)
 
+
+# --- 🧮 Función auxiliar para aplicar las fórmulas basadas en scale.x ---
+func update_velocity_based_on_scale() -> void:
+	var x = scale.x
+	
+	# 1. Primera función para Aceleración (Inversa: y = 1500 / x)
+	acceleration = 1500.0 / x
+	
+	# 2. Segunda función para Vel. Máx (Cuadrática: y = -144000x² + 284000x + 18000)
+	max_speed = -144000.0 * pow(x, 2) + 284000.0 * x + 18000.0
 # --- 🔹 FUNCIÓN DE IMPACTO MEJORADA ---
 func apply_impact(obstacle_position: Vector2) -> void:
 	# Calcular dirección desde el obstáculo hacia la nave
@@ -210,7 +213,12 @@ func _on_player_area_entered(area: Area2D) -> void:
 		apply_impact(obstacle_position)
 		$sfx_crash.play()
 		print("💥 CHOQUE CON OBSTÁCULO - Nave aturdida y empujada!")
-		
+		# NUEVO: Notificar al tutorial si estamos en la fase de obstáculos
+		var tutorial = get_tree().get_first_node_in_group("tutorial")
+		if tutorial and tutorial.has_method("obstaculo_chocado"):
+			tutorial.obstaculo_chocado()
+		else:
+			print("⚠️ No se encontró el tutorial o no tiene obstaculo_chocado()")
 	if area.name == "enemy":
 		is_touching_enemy = true
 		

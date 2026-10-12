@@ -1,8 +1,9 @@
 extends Control
 var select = load("res://accets/selection.png")
 var unselect = load("res://accets/unselect.png")
+@onready var musica: AudioStreamPlayer2D = $ms_MainMenu
+var points = 0
 func leer_numero_de_txt(ruta: String) -> int:
-	var points =0
 	if ResourceLoader.exists(ruta):
 		var data =load(ruta)
 		points =data.max_point
@@ -10,12 +11,17 @@ func leer_numero_de_txt(ruta: String) -> int:
 	return points
 	
 func _ready() -> void:
-	$ms_MainMenu.playing =true
 	$MainMenu/VBoxContainer2/HBoxContainer/Kills/NK.text = str(leer_numero_de_txt("user://save.tres")).pad_zeros(3)
-	pass
+	musica.finished.connect(_on_musica_finished)
+	musica.play()
+func _on_musica_finished() -> void:
+	musica.play()
 func _on_play_pressed() -> void:
 	$sfx_PressStart.play()
-	get_tree().change_scene_to_file("res://main.tscn")
+	if points > 0:
+		get_tree().change_scene_to_file("res://main.tscn")
+	else:
+		get_tree().change_scene_to_file("res://Escenas/Tutorial.tscn")
 
 
 func _on_options_pressed() -> void:
@@ -47,3 +53,16 @@ func _on_play_mouse_entered() -> void:
 	$MainMenu/VBoxContainer/Play.icon =select
 func _on_play_mouse_exited() -> void:
 	$MainMenu/VBoxContainer/Play.icon =unselect
+
+
+func _on_tutorial_pressed() -> void:
+	$sfx_PressStart.play()
+	get_tree().change_scene_to_file("res://Escenas/Tutorial.tscn")
+
+
+func _on_tutorial_mouse_entered() -> void:
+	$MainMenu/VBoxContainer/Tutorial.icon = select
+
+
+func _on_tutorial_mouse_exited() -> void:
+	$MainMenu/VBoxContainer/Tutorial.icon = unselect
